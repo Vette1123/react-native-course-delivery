@@ -62,6 +62,7 @@ const App: () => Node = () => {
   };
   const [data, setData] = useState([]);
   const [filteredData, setfilteredData] = useState([]);
+  const [search, setSearch] = useState('');
   useEffect(() => {
     getPostsData();
   }, []);
@@ -95,9 +96,27 @@ const App: () => Node = () => {
           backgroundColor: isDarkMode ? Colors.black : Colors.white,
           paddingHorizontal: 20,
         }}>
-        <TextInput style={styles.textInputStyle} />
+        <TextInput
+          style={styles.inputStyle}
+          placeholder="Search..."
+          onChangeText={text => {
+            setSearch(text);
+            const newData = data.filter(item => {
+              const itemData = item.title.toUpperCase();
+              const textData = text.toUpperCase();
+              return itemData.indexOf(textData) > -1;
+            });
+            if (text.length === 0) {
+              setfilteredData([]);
+            } else {
+              setfilteredData(newData);
+            }
+          }}
+          value={search}
+        />
+
         <FlatList
-          data={data}
+          data={filteredData}
           keyExtractor={item => item.id.toString()}
           ItemSeparatorComponent={() => (
             <View
