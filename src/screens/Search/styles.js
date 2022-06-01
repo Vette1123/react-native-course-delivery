@@ -3,7 +3,7 @@ import {COLORS} from '../../theme';
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: COLORS.oxfordBlue,
     overflow: 'hidden',
   },
@@ -19,4 +19,7 @@ export default StyleSheet.create({
     borderBottomRightRadius: 6,
   },
   icon: {alignSelf: 'center'},
+  contentContainer: {
+    paddingHorizontal: 16,
+  },
 });
