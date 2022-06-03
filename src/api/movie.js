@@ -1,10 +1,11 @@
 import {client} from './client';
 
-export const getMovieList = async ({searchValue}) => {
+export const getMovieList = async ({searchValue, currentPage}) => {
   try {
     const response = await client.get('/', {
       params: {
         s: searchValue,
+        page: currentPage,
       },
     });
     const {data} = response;
